@@ -36,6 +36,7 @@ export const VaultWithdrawButton = (
     const handleWithdrawAmountChanged = () => {
       if (withdrawAmount > 0n && userAddress && token) {
         // Force a re-render to update button state
+        window.dispatchEvent(new Event('withdrawAmountChanged'))
       }
     }
 

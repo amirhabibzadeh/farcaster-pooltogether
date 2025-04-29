@@ -10,6 +10,7 @@ import classNames from 'classnames'
 import { Address } from 'viem'
 import { useAccount } from 'wagmi'
 import { useEffect } from 'react'
+import { Loading } from '@components/Loading'
 
 interface VaultDepositButtonProps {
   vault: Vault
@@ -53,6 +54,7 @@ export const VaultDepositButton = (
     const handleDepositAmountChanged = () => {
       if (depositAmount > 0n && userAddress && token?.address) {
         refetchAllowance()
+        onDepositAmountChange?.()
       }
     }
 
@@ -60,11 +62,15 @@ export const VaultDepositButton = (
     return () => {
       window.removeEventListener('depositAmountChanged', handleDepositAmountChanged)
     }
-  }, [depositAmount, userAddress, token?.address, refetchAllowance])
+  }, [depositAmount, userAddress, token?.address, refetchAllowance, onDepositAmountChange])
 
   const { sendApproveTransaction } = useSendApproveTransaction(depositAmount, vault, {
     onSuccess: () => {
       refetchAllowance()
+      // Automatically trigger deposit after successful approval
+      if (sendDepositTransaction) {
+        sendDepositTransaction()
+      }
     }
   })
 
@@ -79,10 +85,18 @@ export const VaultDepositButton = (
   const buttonClassName =
     'px-4 py-2 bg-pt-teal-dark text-pt-purple-900 rounded select-none disabled:opacity-50 disabled:pointer-events-none text-lg font-medium'
 
-  if (!depositAmount || !userAddress || !token || allowance === undefined) {
+  if (!depositAmount || !userAddress || !token) {
     return (
       <button className={classNames(buttonClassName, className)} disabled={true}>
         Deposit
+      </button>
+    )
+  }
+
+  if (allowance === undefined) {
+    return (
+      <button className={classNames(buttonClassName, className)} disabled={true}>
+        <Loading className="h-4" />
       </button>
     )
   }
