@@ -3,8 +3,8 @@
         "version": "1",
         "name": "PoolTogether Farcaster Mini App",
         "homeUrl": "https://farcaster-pooltogether.vercel.app/",
-        "iconUrl": "https://pooltogether.com/logo.png",
-        "splashImageUrl": "https://pooltogether.com/logo.png",
+        "iconUrl": "https://farcaster-pooltogether.vercel.app/logo.png",
+        "splashImageUrl": "https://farcaster-pooltogether.vercel.app/logo.png",
         "splashBackgroundColor": "#ffffff",
         "subtitle": "Win prizes by saving money",
         "description": "PoolTogether is a prize savings protocol. Save money and win prizes every week!",
@@ -15,10 +15,10 @@
             "prizes",
             "ethereum"
         ],
-        "heroImageUrl": "https://pooltogether.com/hero.png",
+        "heroImageUrl": "https://farcaster-pooltogether.vercel.app/hero.png",
         "tagline": "Save money, win prizes",
-        "ogTitle": "PoolTogether - Prize Savings Protocol",
+        "ogTitle": "PoolTogether - Save & Win",
         "ogDescription": "Save money and win prizes every week with PoolTogether",
-        "ogImageUrl": "https://pooltogether.com/og-image.png"
+        "ogImageUrl": "https://farcaster-pooltogether.vercel.app/og-image.png"
     }
 }
