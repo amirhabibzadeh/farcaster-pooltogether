@@ -1,4 +1,9 @@
 {
+    "accountAssociation": {
+        "header": "eyJmaWQiOjExODMxLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4NUZlNDI5MzBCZDJlQjRDMjdENEFlM2U1NGE0QzQ3NkNCNTcyOTA4QyJ9",
+        "payload": "eyJkb21haW4iOiJmYXJjYXN0ZXItcG9vbHRvZ2V0aGVyLnZlcmNlbC5hcHAifQ",
+        "signature": "MHgzZGJmNjAyNTVjYWYyYzg5ZTI0NTQzMTNjNzIyYzQ2NmE3YmVmNWFkZGQyYTFmNzI0ZTcyZmU3OGJlMGZhNWQyMDIyMWQyMmM1NTAzODFkNTJiMWM1MGQ2Y2VkNzJkMmU3NTg3ZjIxY2E5MDRiMzljYzM1OGY2MDAwZjBhM2U0MTFi"
+    },
     "frame": {
         "version": "1",
         "name": "PoolTogether Farcaster Mini App",
