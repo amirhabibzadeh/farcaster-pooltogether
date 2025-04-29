@@ -5,7 +5,7 @@
         "homeUrl": "https://farcaster-pooltogether.vercel.app/",
         "iconUrl": "https://farcaster-pooltogether.vercel.app/pooltogetherLogo.svg",
         "splashImageUrl": "https://farcaster-pooltogether.vercel.app/pooltogetherLogo.svg",
-        "splashBackgroundColor": "#ffffff",
+        "splashBackgroundColor": "#1a1a1a",
         "subtitle": "Win prizes by saving money",
         "description": "PoolTogether is a prize savings protocol. Save money and win prizes every week!",
         "primaryCategory": "finance",
@@ -19,6 +19,6 @@
         "tagline": "Save money, win prizes",
         "ogTitle": "PoolTogether - Save & Win",
         "ogDescription": "Save money and win prizes every week with PoolTogether",
-        "ogImageUrl": "https://farcaster-pooltogether.vercel.app/pooltogetherLogo.svg"
+        "ogImageUrl": "https://farcaster-pooltogether.vercel.app/pt-og-image.png"
     }
 }
