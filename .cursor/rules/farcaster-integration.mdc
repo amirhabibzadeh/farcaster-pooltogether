@@ -1,0 +1,28 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Farcaster Integration
+
+This project supports authentication and profile display via [Farcaster](https://www.farcaster.xyz/), integrated at both the provider and UI levels.
+
+## Providers
+- [`FarcasterProvider.tsx`](mdc:src/providers/FarcasterProvider.tsx):
+  - Wraps the app to initialize the Farcaster SDK and ensure readiness before rendering content.
+  - Used in [`app.tsx`](mdc:src/app/app.tsx) to wrap the main app, ensuring all children have access to Farcaster context.
+
+## Authentication UI
+- [`FarcasterAuth.tsx`](mdc:src/components/FarcasterAuth.tsx):
+  - UI component for connecting a wallet using the Farcaster connector via Wagmi.
+  - Shows a connect button if not connected, or the connected address if authenticated.
+  - Not currently used directly in the main app, but can be embedded in pages or other components for explicit Farcaster login flows.
+
+## Navbar Integration
+- [`Navbar.tsx`](mdc:src/components/Navbar.tsx):
+  - Fetches and displays the user's Farcaster profile (avatar, display name) if connected.
+  - Uses the Farcaster SDK to load profile data based on the connected address.
+  - Shows a fallback to the wallet address if no Farcaster profile is found.
+
+## SDK
+- Uses [`@farcaster/frame-sdk`](https://www.npmjs.com/package/@farcaster/frame-sdk) for interacting with Farcaster profiles and actions.

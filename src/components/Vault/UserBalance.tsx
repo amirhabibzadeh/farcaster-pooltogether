@@ -5,6 +5,7 @@ import { Address } from 'viem'
 import { useAccount } from 'wagmi'
 import { Loading } from '@components/Loading'
 import { formatTokenAmount } from '@utils/formatting'
+import { useEffect } from 'react'
 
 interface VaultUserBalanceProps {
   vault: Vault
@@ -16,20 +17,28 @@ export const VaultUserBalance = (props: VaultUserBalanceProps) => {
 
   const { address: userAddress } = useAccount()
 
-  const { data: token } = useUserVaultTokenBalance(vault, userAddress as Address)
+  const { data: token, isFetched: isFetchedUserVaultTokenBalance, refetch: refetchUserVaultBalance } = useUserVaultTokenBalance(
+    vault,
+    userAddress as Address
+  )
 
-  if (!userAddress) {
-    return <></>
-  }
+  // Refetch balance when component mounts and when user address changes
+  useEffect(() => {
+    if (userAddress) {
+      refetchUserVaultBalance()
+    }
+  }, [userAddress, refetchUserVaultBalance])
 
-  const userBalance = !!token ? formatTokenAmount(token.amount, token.decimals) : undefined
+  const userBalance = token?.amount ? formatTokenAmount(token.amount, token.decimals, { maximumFractionDigits: 3 }) : '0'
 
   return (
     <div className={classNames('flex gap-1 items-center', className)}>
       <span className='text-pt-purple-100'>Your Balance:</span>
-      {!!token ? (
+      {!userAddress ? (
+        <span className='text-pt-purple-300'>Connect wallet to view</span>
+      ) : isFetchedUserVaultTokenBalance ? (
         <span>
-          {userBalance} {token.symbol}
+          {userBalance} {token?.symbol}
         </span>
       ) : (
         <Loading className='h-2' />

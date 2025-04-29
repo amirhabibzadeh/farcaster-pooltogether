@@ -1,0 +1,27 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Vault Component System
+
+The [`Vault`](mdc:src/components/Vault/index.tsx) component is a composite UI for interacting with a PoolTogether vault. It is used on the home page to display each vault in the [`VAULT_LIST`](mdc:src/constants/config.ts).
+
+## Main Vault UI Structure
+- [`index.tsx`](mdc:src/components/Vault/index.tsx): Exports the `Vault` component, which composes the following:
+  - [`Header.tsx`](mdc:src/components/Vault/Header.tsx): Displays the vault's name and logo.
+  - [`UserBalance.tsx`](mdc:src/components/Vault/UserBalance.tsx): Shows the user's balance in the vault.
+  - [`Balance.tsx`](mdc:src/components/Vault/Balance.tsx): Shows the total assets in the vault.
+  - [`DepositForm.tsx`](mdc:src/components/Vault/DepositForm.tsx): Form for depositing tokens into the vault.
+    - [`DepositButton.tsx`](mdc:src/components/Vault/DepositButton.tsx): Handles approval and deposit transactions.
+  - [`WithdrawForm.tsx`](mdc:src/components/Vault/WithdrawForm.tsx): Form for withdrawing tokens from the vault.
+    - [`WithdrawButton.tsx`](mdc:src/components/Vault/WithdrawButton.tsx): Handles withdrawal transactions.
+
+## Supporting Utilities
+- [`formatting.ts`](mdc:src/utils/formatting.ts): Used for formatting token amounts in the UI.
+- [`Loading.tsx`](mdc:src/components/Loading.tsx): Used to show loading states in all Vault subcomponents.
+
+## Data Flow
+- Vault data and user balances are fetched using hooks from `@generationsoftware/hyperstructure-react-hooks`.
+- The Vault component receives vault info as props and passes it to subcomponents.
+- Deposit and withdraw forms validate user input and trigger blockchain transactions via their respective buttons.

@@ -10,14 +10,15 @@ export default function Home() {
   useEffect(() => setIsMounted(true), [])
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <GrandPrize className='my-12' />
       <div className='flex gap-8 flex-wrap'>
-        {isMounted &&
-          VAULT_LIST.tokens.map((vault) => (
-            <Vault key={`${vault.chainId}-${vault.address}`} {...vault} />
-          ))}
+        {VAULT_LIST.tokens.map((vault) => (
+          <div key={`${vault.chainId}-${vault.address}`} className={!isMounted ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}>
+            <Vault {...vault} />
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   )
 }

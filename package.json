@@ -1,36 +1,44 @@
 {
-  "name": "pooltogether-nextjs-template",
-  "version": "0.1.2",
+  "name": "pooltogether-farcaster-mini-app",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve@latest out"
+    "start": "next start",
+    "lint": "next lint",
+    "tunnel": "lt --port 3000",
+    "dev:tunnel": "concurrently \"npm run dev\" \"npm run tunnel\""
   },
   "dependencies": {
-    "@generationsoftware/hyperstructure-client-js": "^1.13.2",
+    "@farcaster/frame-sdk": "^0.0.36",
+    "@farcaster/frame-wagmi-connector": "^0.0.24",
+    "@generationsoftware/hyperstructure-client-js": "^1.22.2",
     "@generationsoftware/hyperstructure-react-hooks": "^1.17.2",
+    "@headlessui/react": "^2.2.2",
     "@rainbow-me/rainbowkit": "^2.0.0",
     "@tanstack/react-query": "^5.20.5",
+    "@wagmi/core": "^2.17.0",
     "classnames": "^2.5.1",
     "next": "14.1.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-hook-form": "^7.50.1",
-    "viem": "^2.7.9",
-    "wagmi": "2.5.6"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.56.1",
+    "viem": "^2.28.1",
+    "wagmi": "^2.15.0"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.11",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "autoprefixer": "^10.4.17",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.1.0",
+    "localtunnel": "^2.0.2",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.8.3"
   },
   "packageManager": "pnpm@8.12.1"
 }

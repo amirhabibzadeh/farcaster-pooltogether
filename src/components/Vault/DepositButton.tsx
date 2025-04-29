@@ -9,10 +9,12 @@ import {
 import classNames from 'classnames'
 import { Address } from 'viem'
 import { useAccount } from 'wagmi'
+import { useEffect } from 'react'
 
 interface VaultDepositButtonProps {
   vault: Vault
   className?: string
+  onDepositAmountChange?: () => void
 }
 
 export const VaultDepositButton = (
@@ -22,7 +24,7 @@ export const VaultDepositButton = (
     onSuccess?: () => void
   }
 ) => {
-  const { vault, depositAmount, disabled, onSuccess, className } = props
+  const { vault, depositAmount, disabled, onSuccess, className, onDepositAmountChange } = props
 
   const { address: userAddress } = useAccount()
 
@@ -39,6 +41,27 @@ export const VaultDepositButton = (
     token?.address as Address
   )
 
+  // Immediately check allowance when deposit amount or token changes
+  useEffect(() => {
+    if (depositAmount > 0n && userAddress && token?.address) {
+      refetchAllowance()
+    }
+  }, [depositAmount, userAddress, token?.address, refetchAllowance])
+
+  // Listen for manual allowance check triggers
+  useEffect(() => {
+    const handleDepositAmountChanged = () => {
+      if (depositAmount > 0n && userAddress && token?.address) {
+        refetchAllowance()
+      }
+    }
+
+    window.addEventListener('depositAmountChanged', handleDepositAmountChanged)
+    return () => {
+      window.removeEventListener('depositAmountChanged', handleDepositAmountChanged)
+    }
+  }, [depositAmount, userAddress, token?.address, refetchAllowance])
+
   const { sendApproveTransaction } = useSendApproveTransaction(depositAmount, vault, {
     onSuccess: () => {
       refetchAllowance()
@@ -54,7 +77,7 @@ export const VaultDepositButton = (
   })
 
   const buttonClassName =
-    'px-2 py-0.5 bg-pt-teal-dark text-pt-purple-900 rounded select-none disabled:opacity-50 disabled:pointer-events-none'
+    'px-4 py-2 bg-pt-teal-dark text-pt-purple-900 rounded select-none disabled:opacity-50 disabled:pointer-events-none text-lg font-medium'
 
   if (!depositAmount || !userAddress || !token || allowance === undefined) {
     return (

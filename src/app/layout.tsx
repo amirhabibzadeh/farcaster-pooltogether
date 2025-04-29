@@ -3,14 +3,18 @@ import classNames from 'classnames'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import App from './app'
+import { frameConfig } from '../constants/frame'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'PoolTogether App Template',
+  title: 'PoolTogether Farcaster Mini App',
   description:
-    'This is a minimal template for a static NextJS app that interacts with the PoolTogether protocol'
+    'A Farcaster mini app for PoolTogether that allows users to interact with the PoolTogether protocol through Farcaster frames',
+  other: {
+    'fc:frame': JSON.stringify(frameConfig)
+  }
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

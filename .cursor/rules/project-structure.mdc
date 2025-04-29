@@ -1,0 +1,31 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Project Structure Guide
+
+This project is a minimal [NextJS](mdc:README.md) app for interacting with the PoolTogether protocol. The main directories and files are:
+
+- [`src/`](mdc:src): Main source code directory.
+  - [`app/`](mdc:src/app): NextJS app directory, contains the main entry points, layout, and page components.
+    - [`layout.tsx`](mdc:src/app/layout.tsx): Root layout, applies global styles and wraps the app in providers.
+    - [`app.tsx`](mdc:src/app/app.tsx): Main app wrapper, sets up providers (Wagmi, RainbowKit, React Query) and renders the [`Navbar`](mdc:src/components/Navbar.tsx) and page content.
+    - [`page.tsx`](mdc:src/app/page.tsx): Home page, displays the grand prize and vaults.
+  - [`components/`](mdc:src/components): Reusable UI components.
+    - [`GrandPrize.tsx`](mdc:src/components/GrandPrize.tsx): Displays the current grand prize.
+    - [`Navbar.tsx`](mdc:src/components/Navbar.tsx): Top navigation bar with wallet connect.
+    - [`Vault/`](mdc:src/components/Vault): Vault-related UI components (deposit, withdraw, balances, etc).
+  - [`constants/`](mdc:src/constants): App-wide configuration and constants.
+    - [`config.ts`](mdc:src/constants/config.ts): Contains vault list, prize pool info, and Wagmi config.
+  - [`hooks/`](mdc:src/hooks): Custom React hooks.
+    - [`useEthPrice.tsx`](mdc:src/hooks/useEthPrice.tsx): Fetches ETH price in USD.
+  - [`utils/`](mdc:src/utils): Utility/helper functions.
+    - [`formatting.ts`](mdc:src/utils/formatting.ts): Token amount formatting helpers.
+    - [`getRainbowKitTheme.ts`](mdc:src/utils/getRainbowKitTheme.ts): Customizes RainbowKit theme.
+
+Other notable files:
+- [`README.md`](mdc:README.md): Project overview and usage instructions.
+- [`package.json`](mdc:package.json): Project dependencies and scripts.
+- [`tailwind.config.ts`](mdc:tailwind.config.ts): Tailwind CSS configuration.
+- [`tsconfig.json`](mdc:tsconfig.json): TypeScript configuration.
