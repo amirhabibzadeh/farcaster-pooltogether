@@ -1,0 +1,38 @@
+{
+    "editor": {
+        "formatOnSave": true,
+        "tabSize": 2,
+        "insertSpaces": true,
+        "trimTrailingWhitespace": true,
+        "insertFinalNewline": true
+    },
+    "files": {
+        "exclude": {
+            "**/.git": true,
+            "**/node_modules": true,
+            "**/dist": true,
+            "**/build": true,
+            "**/.next": true,
+            "**/coverage": true
+        }
+    },
+    "search": {
+        "exclude": {
+            "**/node_modules": true,
+            "**/dist": true,
+            "**/build": true,
+            "**/.next": true,
+            "**/coverage": true
+        }
+    },
+    "typescript": {
+        "tsdk": "node_modules/typescript/lib"
+    },
+    "javascript": {
+        "format": {
+            "semicolons": true,
+            "singleQuote": true,
+            "trailingComma": "es5"
+        }
+    }
+}

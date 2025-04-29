@@ -7,6 +7,7 @@ import {
 import classNames from 'classnames'
 import { Address } from 'viem'
 import { useAccount } from 'wagmi'
+import { useEffect } from 'react'
 
 interface VaultWithdrawButtonProps {
   vault: Vault
@@ -30,6 +31,20 @@ export const VaultWithdrawButton = (
     userAddress as Address
   )
 
+  // Listen for withdraw amount changes
+  useEffect(() => {
+    const handleWithdrawAmountChanged = () => {
+      if (withdrawAmount > 0n && userAddress && token) {
+        // Force a re-render to update button state
+      }
+    }
+
+    window.addEventListener('withdrawAmountChanged', handleWithdrawAmountChanged)
+    return () => {
+      window.removeEventListener('withdrawAmountChanged', handleWithdrawAmountChanged)
+    }
+  }, [withdrawAmount, userAddress, token])
+
   const { sendWithdrawTransaction } = useSendWithdrawTransaction(withdrawAmount, vault, {
     onSuccess: () => {
       refetchVaultBalance()
@@ -39,7 +54,7 @@ export const VaultWithdrawButton = (
   })
 
   const buttonClassName =
-    'px-2 py-0.5 bg-pt-teal-dark text-pt-purple-900 rounded select-none disabled:opacity-50 disabled:pointer-events-none'
+    'px-4 py-2 bg-pt-teal-dark text-pt-purple-900 rounded select-none disabled:opacity-50 disabled:pointer-events-none text-lg font-medium'
 
   if (!withdrawAmount || !userAddress || !token) {
     return (

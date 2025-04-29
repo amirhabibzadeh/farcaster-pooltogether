@@ -1,0 +1,19 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Providers and Theme Customization
+
+## Providers
+The app is wrapped in several providers to enable blockchain connectivity, wallet integration, and data fetching:
+- [`app.tsx`](mdc:src/app/app.tsx):
+  - `WagmiProvider`: Configured with [`WAGMI_CONFIG`](mdc:src/constants/config.ts) for blockchain access.
+  - `QueryClientProvider`: Sets up React Query for data fetching and caching.
+  - `RainbowKitProvider`: Enables wallet connection UI, themed with a custom theme.
+  - Renders the [`Navbar`](mdc:src/components/Navbar.tsx) and page content.
+- [`layout.tsx`](mdc:src/app/layout.tsx): Applies global styles and wraps the app in the above providers.
+
+## Theme Customization
+- [`getRainbowKitTheme.ts`](mdc:src/utils/getRainbowKitTheme.ts): Customizes the RainbowKit dark theme with PoolTogether colors and styles.
+- Tailwind CSS is configured in [`tailwind.config.ts`](mdc:tailwind.config.ts) and used throughout the app for utility-first styling.

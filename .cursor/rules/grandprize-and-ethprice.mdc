@@ -1,0 +1,13 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# GrandPrize and ETH Price
+
+- [`GrandPrize.tsx`](mdc:src/components/GrandPrize.tsx): Displays the current grand prize in the PoolTogether protocol, both in the prize token and its USD equivalent.
+  - Fetches prize pool and token data using hooks from `@generationsoftware/hyperstructure-react-hooks`.
+  - Uses [`useEthPriceInUsd`](mdc:src/hooks/useEthPrice.tsx) to fetch the current ETH price in USD for display.
+  - Shows loading states using [`Loading.tsx`](mdc:src/components/Loading.tsx).
+
+- [`useEthPrice.tsx`](mdc:src/hooks/useEthPrice.tsx): Custom React hook to fetch the price of ETH in USD using token price data from the PoolTogether SDK.
