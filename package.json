@@ -14,7 +14,7 @@
     "@farcaster/frame-sdk": "^0.0.36",
     "@farcaster/frame-wagmi-connector": "^0.0.24",
     "@generationsoftware/hyperstructure-client-js": "^1.22.2",
-    "@generationsoftware/hyperstructure-react-hooks": "^1.17.2",
+    "@generationsoftware/hyperstructure-react-hooks": "^1.27.4",
     "@headlessui/react": "^2.2.2",
     "@rainbow-me/rainbowkit": "^2.0.0",
     "@tanstack/react-query": "^5.20.5",

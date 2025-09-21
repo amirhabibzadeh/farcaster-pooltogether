@@ -38,15 +38,33 @@ export const VaultDepositForm = (props: VaultDepositFormProps) => {
 
   const formTokenAmount = watch('tokenAmount')
 
+  const handleMaxClick = () => {
+    if (userBalance === undefined || !token) return
+    const maxAmount = formatUnits(userBalance, token.decimals)
+    setValue('tokenAmount', maxAmount, { shouldValidate: true })
+  }
+
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | undefined = undefined
+    let lastDispatchedAmount = ''
+    let isProcessing = false
+
     if (formTokenAmount && userAddress && token) {
       const amount = parseUnits(formTokenAmount, token.decimals)
-      if (amount > 0n) {
-        // Add a small delay to ensure the form value is updated
-        setTimeout(() => {
+      if (amount > 0n && formTokenAmount !== lastDispatchedAmount && !isProcessing) {
+        isProcessing = true
+        console.log('DepositForm: Amount changed to', formTokenAmount)
+        if (timeoutId) clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+          console.log('DepositForm: Dispatching depositAmountChanged event')
+          lastDispatchedAmount = formTokenAmount
           window.dispatchEvent(new Event('depositAmountChanged'))
-        }, 0)
+          isProcessing = false
+        }, 500) // Increased debounce time to 500ms
       }
+    }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [formTokenAmount, userAddress, token])
 
@@ -57,16 +75,6 @@ export const VaultDepositForm = (props: VaultDepositFormProps) => {
   const depositAmount =
     !!formTokenAmount && formState.isValid ? parseUnits(formTokenAmount, token.decimals) : 0n
   const errorMsg = formState.errors['tokenAmount']?.message
-
-  const handleMaxClick = () => {
-    if (userBalance === undefined) return
-    const maxAmount = formatUnits(userBalance, token.decimals)
-    setValue('tokenAmount', maxAmount, { shouldValidate: true })
-    // Add a small delay to ensure the form value is updated
-    setTimeout(() => {
-      window.dispatchEvent(new Event('depositAmountChanged'))
-    }, 0)
-  }
 
   return (
     <div className={classNames('flex flex-col items-center gap-6 p-6 bg-white/5 rounded-xl', className)}>

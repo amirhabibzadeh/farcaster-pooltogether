@@ -33,16 +33,30 @@ export const VaultWithdrawForm = (props: VaultWithdrawFormProps) => {
 
   const formTokenAmount = watch('tokenAmount')
 
-  // Trigger state update when form value changes
+  const handleMaxClick = () => {
+    if (userBalance === undefined) return
+    const maxAmount = formatUnits(userBalance, token.decimals)
+    setValue('tokenAmount', maxAmount, { shouldValidate: true })
+  }
+
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout
+    let lastDispatchedAmount = ''
+
     if (formTokenAmount && userAddress && token) {
       const amount = parseUnits(formTokenAmount, token.decimals)
-      if (amount > 0n) {
-        // Add a small delay to ensure the form value is updated
-        setTimeout(() => {
+      if (amount > 0n && formTokenAmount !== lastDispatchedAmount) {
+        console.log('WithdrawForm: Amount changed to', formTokenAmount)
+        if (timeoutId) clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
+          console.log('WithdrawForm: Dispatching withdrawAmountChanged event')
+          lastDispatchedAmount = formTokenAmount
           window.dispatchEvent(new Event('withdrawAmountChanged'))
-        }, 0)
+        }, 500) // Increased debounce time to 500ms
       }
+    }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [formTokenAmount, userAddress, token])
 
@@ -53,16 +67,6 @@ export const VaultWithdrawForm = (props: VaultWithdrawFormProps) => {
   const withdrawAmount =
     !!formTokenAmount && formState.isValid ? parseUnits(formTokenAmount, token.decimals) : 0n
   const errorMsg = formState.errors['tokenAmount']?.message
-
-  const handleMaxClick = () => {
-    if (userBalance === undefined) return
-    const maxAmount = formatUnits(userBalance, token.decimals)
-    setValue('tokenAmount', maxAmount, { shouldValidate: true })
-    // Add a small delay to ensure the form value is updated
-    setTimeout(() => {
-      window.dispatchEvent(new Event('withdrawAmountChanged'))
-    }, 0)
-  }
 
   return (
     <div className={classNames('flex flex-col items-center gap-6 p-6 bg-white/5 rounded-xl', className)}>
